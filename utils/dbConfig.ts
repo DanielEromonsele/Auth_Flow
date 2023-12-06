@@ -1,16 +1,17 @@
-import {connect} from "mongoose"
+import mongoose from "mongoose"
 import dotEnv from "dotenv"
 dotEnv.config()
 
-const URL: string | undefined  = process.env.DATABASE_STRING ;
+// const URL: string  = process.env.DATABASE_STRING! ;
+const URL: string  = "mongodb+srv://danieleromonsele01:daniel123@cluster0.abnlgn4.mongodb.net/" ;
 
 export const dbConfig = ()=>{
     try {
-    connect("mongodb://127.0.0.1:27017/authFlowDB").then(()=>{
+    mongoose.connect(URL).then(()=>{
         console.log("DB connection established");
         
     })
-    } catch (error) {
-       return error
+    } catch (error:any) {
+       return error.message
     }
 }

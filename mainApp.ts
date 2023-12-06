@@ -1,8 +1,11 @@
 import { Application, NextFunction, Request, Response } from "express";
 import { HTTP, mainError } from "./error/mainError";
 import { errorHandler } from "./error/errorHandlers";
+import user from "./router/userRouter"
 
 export const mainApp = (app: Application) =>{
+
+
     try {
         app.get("/", (req: Request, res: Response) => {
             try {
@@ -14,8 +17,10 @@ export const mainApp = (app: Application) =>{
                     message: "Invalid"
                 })
             }
+            
         })
 
+        app.use("/api/v1", user)
         app.all("*", (req: Request, res: Response, next: NextFunction) => {
             next(
                 new mainError({

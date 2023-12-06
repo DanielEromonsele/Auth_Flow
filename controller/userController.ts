@@ -27,15 +27,16 @@ export const createUser = async (
       message: "created",
       data: user,
     });
-  } catch (error) {
+  } catch (error:any) {
     return res.status(HTTP.BAD).json({
       message: "error",
-      data: new mainError({
-        name: "createUser",
-        message: "",
-        status: HTTP.BAD,
-        success: false,
-      }),
+      data:error.message
+    //   data: new mainError({
+    //     name: "createUser",
+    //     message: "",
+    //     status: HTTP.BAD,
+    //     success: false,
+    //   }),
     });
   }
 };
